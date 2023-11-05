@@ -17,6 +17,8 @@ namespace MyFinApp.MODEL
         public string Name { get; set; }  // имя дохода
         public DateTime DateTime { get; set; }  // дата дохода
 
+        public float Sum { get; set; }  // сумма дохода
+
         // реализация связи 1:N - один источник - много доходов
         // к доходу соотносится один источник - создаем свойство Источник
         public virtual IncomeSource Source { get; set; }

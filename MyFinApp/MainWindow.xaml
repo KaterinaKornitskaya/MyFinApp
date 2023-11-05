@@ -5,8 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyFinApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"
+        xmlns:MyUserControls="clr-namespace:MyFinApp.MyUserControls">
+
+    <Window.Resources>
+        
+        
+        <Style x:Key="mainMenuBtn" TargetType="Button">
+            <Setter Property="Background" Value="Green"/>
+            <Setter Property="FontSize" Value="14"/>
+            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Green"/>
+                </Trigger>
+            </Style.Triggers>
+
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="16"/>
+                </Style>
+                
+            </Style.Resources>
+            
+            
+        </Style>
+        
+        <LinearGradientBrush x:Key="gradient1" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="White" Offset="1"/>
+            <GradientStop Color="ForestGreen" Offset="0.5"/>
+        </LinearGradientBrush>
+        
+       
+        
+    </Window.Resources>
+    
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <MyUserControls:UC_Category x:Name="myUCCategory" Grid.Column="1" Visibility="Collapsed" Grid.ColumnSpan="2">
+        </MyUserControls:UC_Category>
+
+        <MyUserControls:UC_Source x:Name="myUCSource" Grid.Column="1" Visibility="Collapsed" Grid.ColumnSpan="2">
+        </MyUserControls:UC_Source>
+
+        <MyUserControls:UC_Outcome x:Name="myUCOutcome" Grid.Column="1" Visibility="Collapsed" Grid.ColumnSpan="2">
+        </MyUserControls:UC_Outcome>
+
+        <MyUserControls:UC_Income x:Name="myUCIncome" Grid.Column="1" Visibility="Collapsed" Grid.ColumnSpan="2">
+        </MyUserControls:UC_Income>
+
+        <Grid Grid.Column="0">
+            <StackPanel Margin="10">
+                <Button x:Name="Category" Click="Category_Click" Margin="0,5" Padding="10,5"
+                        Style="{StaticResource mainMenuBtn}" Content="Категории расходов">
+                    <Button.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.4"></DropShadowEffect>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="Source" Click="Source_Click" Margin="0,5" Padding="10,5"
+                        Style="{StaticResource mainMenuBtn}" Content="Источники доходов">
+                    <Button.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.4"></DropShadowEffect>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="Outcome" Click="Outcome_Click" Margin="0,5" Padding="10,5"
+                        Style="{StaticResource mainMenuBtn}" Content="Расходы">
+                    <Button.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.4"></DropShadowEffect>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="Income" Click="Income_Click" Margin="0,5" Padding="10,5"
+                        Style="{StaticResource mainMenuBtn}" Content="Доходы">
+                    <Button.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.4"></DropShadowEffect>
+                    </Button.Effect>
+                </Button>
+                <ComboBox x:Name="styleBox"/>
+            </StackPanel>
+
+        </Grid>
+       
 
     </Grid>
+
+
 </Window>

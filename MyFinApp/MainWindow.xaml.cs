@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using System.Windows.Media.Effects;
+
 
 namespace MyFinApp
 {
@@ -25,34 +29,55 @@ namespace MyFinApp
         {
             InitializeComponent();
             Connector connector = new Connector();
-            connector.AddOutcome("out5", "pro4");
 
-            //using (DBContext db = new DBContext())
-            //{
-            //    //IncomeSource income = new IncomeSource { Name = "name3" };
-            //    //db.IncomeSources.Add(income);
-            //    ////db.SaveChanges();
+            
 
+            List<string> styles = new List<string> { "light", "dark" };
+            styleBox.SelectionChanged += ThemeChange;
+            styleBox.ItemsSource = styles;
+            styleBox.SelectedItem = "dark";
 
-            //    ////db.SaveChanges();
+            
+        }
+        public void ThemeChange(object sender, SelectionChangedEventArgs e)
+        {
+            string style = styleBox.SelectedItem as string;
+            var uri = new Uri(style + ".xaml", UriKind.Relative);
+            ResourceDictionary resDict = Application.LoadComponent(uri) as ResourceDictionary;
+            Application.Current.Resources.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(resDict);
+        }
 
+        private void Category_Click(object sender, RoutedEventArgs e)
+        {
+            myUCSource.Visibility = Visibility.Collapsed;
+            myUCOutcome.Visibility = Visibility.Collapsed;
+            myUCIncome.Visibility = Visibility.Collapsed;
+            myUCCategory.Visibility = Visibility.Visible;
+        }
 
-            //    Outcome out3 = new Outcome
-            //    {
-            //        Name = "out5",
-            //        DateTime = DateTime.Now,
-            //        Category = db.OutcomeCategories.Where(x => x.Name=="pro2").FirstOrDefault()
-            //    };
+        private void Source_Click(object sender, RoutedEventArgs e)
+        {
+            myUCCategory.Visibility = Visibility.Collapsed;
+            myUCOutcome.Visibility = Visibility.Collapsed;
+            myUCIncome.Visibility = Visibility.Collapsed;
+            myUCSource.Visibility = Visibility.Visible;
+        }
 
-            //    db.Outcomes.Add(out3);
-            //    db.SaveChanges();
+        private void Outcome_Click(object sender, RoutedEventArgs e)
+        {
+            myUCCategory.Visibility = Visibility.Collapsed;
+            myUCSource.Visibility = Visibility.Collapsed;
+            myUCIncome.Visibility = Visibility.Collapsed;
+            myUCOutcome.Visibility = Visibility.Visible;
+        }
 
-
-
-
-
-            //}
-
+        private void Income_Click(object sender, RoutedEventArgs e)
+        {
+            myUCCategory.Visibility = Visibility.Collapsed;
+            myUCSource.Visibility = Visibility.Collapsed; 
+            myUCOutcome.Visibility = Visibility.Collapsed;
+            myUCIncome.Visibility = Visibility.Visible;
         }
     }
 }

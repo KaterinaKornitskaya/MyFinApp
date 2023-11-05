@@ -18,6 +18,8 @@ namespace MyFinApp.MODEL
         
         public DateTime DateTime { get; set; }  // дата затраты
 
+        public float Sum { get; set; }  // сумма затраты
+
         // реализация связи 1:N - одна категория - много затрат
         // к затрате соотносится одна категория - создаем свойство Категория
         public virtual OutcomeCategory Category { get; set; }
